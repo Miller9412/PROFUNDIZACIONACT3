@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VapeShop - Cigarrillos Electrónicos</title>
+    <style type="text/scss">
+        // ============================================
+        // VARIABLES SASS (Requisito a: 5 variables)
+        // ============================================
+        $color-primary: #667eea;
+        $color-secondary: #764ba2;
+        $color-dark: #333;
+        $color-light: #f5f7fa;
+        $border-radius: 10px;
+        
+        // Variables adicionales para interpolación
+        $side: left;
+        $property: margin;
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: $color-dark;
+        }
+        
+        // ============================================
+        // ANIDACIÓN DE SELECTORES (Requisito b)
+        // ============================================
+        header {
+            background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            p {
+                font-size: 1.2rem;
+            }
+        }
+        
+        nav {
+            background: $color-dark;
+            padding: 1rem;
+            text-align: center;
+            
+            a {
+                color: white;
+                text-decoration: none;
+                margin: 0 1.5rem;
+                font-weight: bold;
+                
+                &:hover {
+                    color: $color-primary;
+                }
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .productos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        // ============================================
+        // INTERPOLACIÓN (Requisito c: 2 casos)
+        // ============================================
+        .producto-card {
+            background: white;
+            border-radius: $border-radius;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+            
+            // Interpolación 1: usando variable en nombre de propiedad
+            #{$property}-#{$side}: 0;
+            
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            }
+            
+            h3 {
+                color: $color-primary;
+                margin-bottom: 0.5rem;
+            }
+            
+            p {
+                color: #666;
+                margin-bottom: 1rem;
+            }
+        }
+        
+        .producto-img {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, $color-light 0%, #c3cfe2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .precio {
+            font-size: 1.5rem;
+            color: $color-secondary;
+            font-weight: bold;
+            margin: 1rem 0;
+            
+            // Interpolación 2: usando variable en selector de pseudo-elemento
+            &::before {
+                content: "$";
+            }
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: opacity 0.3s;
+            
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+        
+        .info-section {
+            background: $color-light;
+            padding: 3rem 0;
+            margin-top: 3rem;
+            text-align: center;
+            
+            h2 {
+                color: $color-primary;
+                margin-bottom: 1rem;
+            }
+            
+            p {
+                max-width: 800px;
+                margin: 0 auto;
+                font-size: 1.1rem;
+            }
+        }
+        
+        footer {
+            background: $color-dark;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            
+            p {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sass.js/0.11.1/sass.sync.min.js"></script>
+    <script>
+        // Compilar Sass a CSS
+        document.addEventListener('DOMContentLoaded', function() {
+            const sassStyle = document.querySelector('style[type="text/scss"]');
+            const sassCode = sassStyle.textContent;
+            
+            Sass.compile(sassCode, function(result) {
+                if (result.status === 0) {
+                    const style = document.createElement('style');
+                    style.textContent = result.text;
+                    document.head.appendChild(style);
+                    sassStyle.remove();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>🌬️ VapeShop</h1>
+        <p>Tu tienda de confianza en cigarrillos electrónicos</p>
+    </header>
+    
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#productos">Productos</a>
+        <a href="#info">Información</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+    
+    <div class="container" id="productos">
+        <h2 style="text-align: center; color: #667eea; font-size: 2rem; margin-bottom: 1rem;">Nuestros Productos</h2>
+        
+        <div class="productos">
+            <div class="producto-card">
+                <div class="producto-img">
+                <img src="https://okvape.co.uk/wp-content/uploads/2021/05/OK-Pod-Starter-Kit-2.jpg" alt="Producto" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <h3>Vape Pod Starter</h3>
+                <p>Ideal para principiantes. Compacto y fácil de usar con batería de larga duración.</p>
+                <div class="precio">120.000</div>
+                <button class="btn">Comprar Ahora</button>
+            </div>
+            
+            <div class="producto-card">
+                <div class="producto-img">
+                <img src="https://www.vapevo.com/cdn/shop/files/lost-vape-box-mod-thelema-solo-100w-black-carbon-fiber.jpg?v=1736276664&width=800" alt="Producto" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <h3>Mod Box Pro</h3>
+                <p>Para usuarios avanzados. Control de temperatura y potencia variable.</p>
+                <div class="precio">320.000</div>
+                <button class="btn">Comprar Ahora</button>
+            </div>
+            
+            <div class="producto-card">
+                <div class="producto-img">
+                <img src="https://cdn.vapeo24.com/25b27c2e-f1c3-45f1-ed4a-0d2696b80100/md" alt="Producto" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <h3>Vape Pen Classic</h3>
+                <p>Diseño elegante y discreto. Perfecto para llevar a todas partes.</p>
+                <div class="precio">160.000</div>
+                <button class="btn">Comprar Ahora</button>
+            </div>
+            
+            <div class="producto-card">
+                <div class="producto-img">
+                <img src="https://m.media-amazon.com/images/I/81o0nv1qK1L.jpg" alt="Producto" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <h3>E-Liquid Premium</h3>
+                <p>Variedad de sabores. Disponible en diferentes concentraciones de nicotina.</p>
+                <div class="precio">52.000</div>
+                <button class="btn">Comprar Ahora</button>
+            </div>
+            
+            <div class="producto-card">
+                <div class="producto-img">
+                <img src="https://vapeuk.co.uk/media/wysiwyg/6--geekvape-aegis-legend-5-vape-kit_1.jpg" alt="Producto" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <h3>Kit Completo Deluxe</h3>
+                <p>Todo lo que necesitas para empezar. Incluye dispositivo, líquidos y accesorios.</p>
+                <div class="precio">400.000</div>
+                <button class="btn">Comprar Ahora</button>
+            </div>
+            
+            <div class="producto-card">
+                <div class="producto-img">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGOcW5m9p1AE0u_A-i30KxrdyTL9BbtlCfnA&s" alt="Producto" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                </div>
+                <h3>Accesorios Variados</h3>
+                <p>Resistencias, baterías, cargadores y más para tu dispositivo.</p>
+                <div class="precio">40.000</div>
+                <button class="btn">Comprar Ahora</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="info-section" id="info">
+        <div class="container">
+            <h2>¿Por qué elegir VapeShop?</h2>
+            <p>
+                Ofrecemos los mejores productos de cigarrillos electrónicos del mercado. 
+                Calidad garantizada, envío rápido y atención al cliente excepcional. 
+                Todos nuestros productos cumplen con las normativas de seguridad vigentes.
+            </p>
+        </div>
+    </div>
+    
+    <footer id="contacto">
+        <p>&copy; 2025 VapeShop. Todos los derechos reservados.</p>
+        <p>Advertencia: Producto solo para mayores de edad</p>
+        <p>Email: miller9412@hotmail.com | Tel: +57 3154138348</p>
+    </footer>
+</body>
+</html>
